@@ -8,8 +8,8 @@ class handler(BaseHTTPRequestHandler):
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
     my_URL_path = self.path
-    my_URL_query = parse.urlsplit(my_URL_path).query
-    query_list = parse.parse_qsl(my_URL_query)
+    my_URL_components = parse.urlsplit(my_URL_path)
+    query_list = parse.parse_qsl(my_URL_components.query)
     my_dict = dict(query_list)
     if my_dict.get('country'):
         country= my_dict.get('country')
