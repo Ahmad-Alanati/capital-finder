@@ -23,7 +23,6 @@ class handler(BaseHTTPRequestHandler):
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
-
-    respons = f"The capital of {country} is {capital}."
+    
     self.wfile.write(respons.encode())
     return
