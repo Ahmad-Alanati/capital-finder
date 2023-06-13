@@ -9,13 +9,16 @@ class handler(BaseHTTPRequestHandler):
     query_list = parse.parse_qsl(my_URL_components.query)
     my_dict = dict(query_list)
 
-    country = "hello"
-    capital = "hello2"
-
-    if my_dict.get('country'):
-        country= my_dict.get('country')
-    if my_dict.get('capital'):
-        capital =  my_dict.get('capital')
+    country = my_dict.get('country')
+    capital = my_dict.get('capital')
+    str_test = "hello"
+    
+    if country and capital:
+       respons = f"The capital of {country} is {capital}."
+    elif my_dict.get('country'):
+        respons = f"The capital of {country} is {str_test}."
+    elif my_dict.get('capital'):
+        respons = f"{capital} is the capital of {str_test}."
     
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
