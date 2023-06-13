@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 from urllib import parse
-#import requests
+import requests
  
 class handler(BaseHTTPRequestHandler):
  
@@ -15,9 +15,9 @@ class handler(BaseHTTPRequestHandler):
     str_test = "hello"
     
     if country and capital:
-    #    api_URL = f'https://restcountries.com/v3.1/name/{country}'
-    #    res = requests.get(api_URL)
-    #    data = res.json()
+       api_URL = f'https://restcountries.com/v3.1/name/{country}'
+       res = requests.get(api_URL)
+       data = res.json()
     #    capital = data[0]["name"][0]
     #    if country == str(data[0]["name"]["common"]).lower() and capital == str(data[0]["capital"][0]).lower():
     #       respons = "Yes, "
