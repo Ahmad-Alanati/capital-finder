@@ -9,6 +9,9 @@ class handler(BaseHTTPRequestHandler):
     query_list = parse.parse_qsl(my_URL_components.query)
     my_dict = dict(query_list)
 
+    country = "hello"
+    capital = "hello2"
+
     if my_dict.get('country'):
         country= my_dict.get('country')
     elif my_dict.get('capital'):
