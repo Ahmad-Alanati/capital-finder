@@ -12,6 +12,6 @@ class handler(BaseHTTPRequestHandler):
 
     country= "Chile"
     capital =  "Santiago"
-    respons = f"The capital of {country} is {capital}."
-    self.wfile.write(type(my_URL_query))
+    respons = str(my_URL_query)
+    self.wfile.write(respons.encode())
     return
