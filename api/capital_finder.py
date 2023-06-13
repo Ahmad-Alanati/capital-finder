@@ -9,9 +9,13 @@ class handler(BaseHTTPRequestHandler):
     self.end_headers()
     my_URL_path = self.path
     my_URL_query = parse.urlsplit(my_URL_path).query
-
-    country= "Chile"
-    capital =  "Santiago"
-    respons = str(my_URL_query)
+    query_list = parse.parse_qsl(my_URL_query)
+    my_dict = dict(query_list)
+    if my_dict.get('country'):
+        country= my_dict.get('country')
+    elif my_dict.get('capital'):
+        capital =  my_dict.get('capital')
+    
+    respons = f"The capital of {country} is {capital}."
     self.wfile.write(respons.encode())
     return
