@@ -14,7 +14,7 @@ class handler(BaseHTTPRequestHandler):
 
     if my_dict.get('country'):
         country= my_dict.get('country')
-    elif my_dict.get('capital'):
+    if my_dict.get('capital'):
         capital =  my_dict.get('capital')
     
     self.send_response(200)
