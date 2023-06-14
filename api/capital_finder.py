@@ -3,6 +3,18 @@ from urllib import parse
 import requests
  
 class handler(BaseHTTPRequestHandler):
+
+  def get_capital(self,country):
+    api_URL = f'https://restcountries.com/v3.1/name/{country}'
+    res = requests.get(api_URL)
+    data = res.json()
+    return str(data[0]["capital"][0]).lower()
+  
+  def get_country(self,capital):
+    api_URL = f'https://restcountries.com/v3.1/capital/{capital}'
+    res = requests.get(api_URL)
+    data = res.json()
+    return str(data[0]["name"]["common"]).lower()
  
   def do_GET(self):
     my_URL_path = self.path
@@ -12,24 +24,21 @@ class handler(BaseHTTPRequestHandler):
 
     country = my_dict.get('country')
     capital = my_dict.get('capital')
-    str_test = "hello"
     
     if country and capital:
-       api_URL = f'https://restcountries.com/v3.1/name/{country}'
-       res = requests.get(api_URL)
-       data = res.json()
-    #    capital = data[0]["name"][0]
-    #    if country == str(data[0]["name"]["common"]).lower() and capital == str(data[0]["capital"][0]).lower():
-    #       respons = "Yes, "
-    #    else:
-    #       respons = "No, "
-    #       country = data[0]["name"]["common"]
-    #       capital = data[0]["capital"][0]
-       respons = f"The capital of {country} is {capital}."
+      respons_capital = self.get_capital(country)
+      respons_country = self.get_country(capital)
+      if country == respons_country and capital == respons_capital:
+        respons = "Yes, "
+      else:
+        respons = "No, "
+      respons += f"The capital of {respons_country} is {respons_capital}."
     elif my_dict.get('country'):
-        respons = f"The capital of {country} is {str_test}."
+      respons_capital = self.get_capital(country)
+      respons = f"The capital of {country} is {respons_capital}."
     elif my_dict.get('capital'):
-        respons = f"{capital} is the capital of {str_test}."
+      respons_country = self.get_country(capital)
+      respons = f"{capital} is the capital of {respons_country}."
     
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
